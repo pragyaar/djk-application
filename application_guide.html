@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Application Guide — Pragya Arya</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #F8F9FA;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #1A1A1A;
+    padding: 48px 24px;
+  }
+
+  .page {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  .header {
+    margin-bottom: 32px;
+  }
+  .header p {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #888;
+    margin-bottom: 6px;
+  }
+  .header h1 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111;
+  }
+  .header span {
+    font-size: 13px;
+    color: #666;
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* ITEMS */
+  .item {
+    display: flex;
+    gap: 16px;
+    background: #fff;
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin-bottom: 4px;
+    align-items: flex-start;
+  }
+
+  .item-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .item:nth-child(1) .item-num { background: #EEF2FF; color: #4F46E5; }
+  .item:nth-child(2) .item-num { background: #E0F2FE; color: #0284C7; }
+  .item:nth-child(3) .item-num { background: #ECFDF5; color: #059669; }
+
+  .item-body { flex: 1; }
+
+  .item-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 2px;
+  }
+
+  .item-file {
+    font-size: 11px;
+    color: #999;
+    font-family: monospace;
+    margin-bottom: 8px;
+  }
+
+  .item-desc {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.6;
+  }
+
+  .item-tag {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+  .item:nth-child(1) .item-tag { background: #EEF2FF; color: #4F46E5; }
+  .item:nth-child(2) .item-tag { background: #E0F2FE; color: #0284C7; }
+  .item:nth-child(3) .item-tag { background: #ECFDF5; color: #059669; }
+
+  /* ARROW */
+  .arrow {
+    text-align: center;
+    color: #D1D5DB;
+    font-size: 18px;
+    padding: 2px 0;
+    margin-bottom: 4px;
+  }
+
+  /* FOOTER NOTE */
+  .note {
+    margin-top: 24px;
+    font-size: 12px;
+    color: #999;
+    text-align: center;
+    border-top: 1px solid #E5E7EB;
+    padding-top: 18px;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <p>Application — DJK India · Marketing Executive</p>
+    <h1>What's attached and why</h1>
+    <span>Pragya Arya · sonipragya8@gmail.com</span>
+  </div>
+
+  <div class="item">
+    <div class="item-num">1</div>
+    <div class="item-body">
+      <div class="item-title">Resume</div>
+      <div class="item-file">Pragya_Arya_DJK.docx</div>
+      <div class="item-desc">Start here. My background, experience, and metrics — tailored to your JD. Covers SEO, PPC, social media, email marketing, and EXPO campaign experience.</div>
+      <span class="item-tag">Read first</span>
+    </div>
+  </div>
+
+  <div class="arrow">↓</div>
+
+  <div class="item">
+    <div class="item-num">2</div>
+    <div class="item-body">
+      <div class="item-title">Digital Audit Microsite</div>
+      <div class="item-file">djk_audit.html · open in browser</div>
+      <div class="item-desc">A quick audit of DJK India's current digital presence and a 90-day plan I put together before applying — including an EXPO marketing playbook specific to your industry.</div>
+      <span class="item-tag">Read second</span>
+    </div>
+  </div>
+
+  <div class="arrow">↓</div>
+
+  <div class="item">
+    <div class="item-num">3</div>
+    <div class="item-body">
+      <div class="item-title">EXPO Lead Follow-up Automation</div>
+      <div class="item-file">expo_lead_automation.py · run with python3</div>
+      <div class="item-desc">A working script that takes your EXPO badge scanner export and generates personalised follow-up emails for every lead — scored, segmented by product, and ready to send. Built specifically for DJK's use case.</div>
+      <span class="item-tag">Optional — run to see it in action</span>
+    </div>
+  </div>
+
+  <div class="note">Happy to walk through any of this in a conversation · shreyansh@djkindia.co.in</div>
+
+</div>
+</body>
+</html>
