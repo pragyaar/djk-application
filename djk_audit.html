@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DJK India — Digital Marketing Audit | Pragya Arya</title>
+<style>
+  :root {
+    --white:   #FFFFFF;
+    --off:     #F7F7F7;
+    --light:   #EFEFEF;
+    --border:  #E0E0E0;
+    --muted:   #999999;
+    --mid:     #555555;
+    --dark:    #222222;
+    --black:   #111111;
+    --blue:    #1C69D4;
+    --serif:   'Georgia', 'Times New Roman', serif;
+    --sans:    'Helvetica Neue', 'Arial', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--white);
+    color: var(--black);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 0 48px;
+    height: 56px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-left { display: flex; align-items: center; gap: 20px; }
+  .nav-name  { font-size: 13px; font-weight: 600; letter-spacing: 0.04em; color: var(--black); }
+  .nav-sep   { color: var(--border); }
+  .nav-role  { font-size: 12px; color: var(--muted); }
+  .nav-right { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+
+  /* ── SECTIONS ── */
+  .section { padding: 96px 48px; border-bottom: 1px solid var(--border); }
+  .section:last-of-type { border-bottom: none; }
+  .section.dark { background: var(--black); color: var(--white); }
+  .section.off   { background: var(--off); }
+  .inner { max-width: 880px; margin: 0 auto; }
+
+  /* ── LABELS ── */
+  .label {
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 20px; display: block;
+  }
+  .label-blue { color: var(--blue); }
+  .dark .label { color: rgba(255,255,255,0.35); }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 160px 48px 96px;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-inner { max-width: 880px; margin: 0 auto; }
+  .hero h1 {
+    font-family: var(--sans);
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    color: var(--black);
+    margin-bottom: 32px;
+  }
+  .hero h1 strong { font-weight: 700; }
+  .hero-sub {
+    font-size: 17px; color: var(--mid);
+    max-width: 520px; line-height: 1.7;
+    margin-bottom: 40px;
+  }
+  .hero-link {
+    font-size: 13px; font-weight: 600;
+    color: var(--blue);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    border-bottom: 1px solid var(--blue);
+    padding-bottom: 2px;
+    transition: opacity 0.2s;
+  }
+  .hero-link:hover { opacity: 0.6; }
+
+  /* ── STATS ── */
+  .stats-row {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--border);
+    border-left: 1px solid var(--border);
+  }
+  .stat {
+    padding: 40px 32px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .stat-num {
+    font-size: 42px; font-weight: 300; letter-spacing: -0.03em;
+    color: var(--black); line-height: 1; margin-bottom: 8px;
+  }
+  .stat-num span { font-weight: 700; }
+  .stat-lbl { font-size: 11px; color: var(--muted); line-height: 1.4; }
+
+  /* ── AUDIT FINDINGS ── */
+  .findings-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--border);
+    border-left: 1px solid var(--border);
+    margin-top: 48px;
+  }
+  .finding {
+    padding: 36px 32px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .finding-status {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 14px;
+  }
+  .status-dot {
+    width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+  }
+  .status-dot.red    { background: #D0021B; }
+  .status-dot.yellow { background: #F5A623; }
+  .status-dot.green  { background: #417505; }
+  .status-label {
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted);
+  }
+  .finding h3 {
+    font-size: 15px; font-weight: 600; color: var(--black);
+    margin-bottom: 10px; line-height: 1.4;
+  }
+  .finding p { font-size: 13px; color: var(--mid); line-height: 1.65; }
+
+  /* ── MOVES ── */
+  .moves { margin-top: 48px; }
+  .move {
+    display: grid; grid-template-columns: 80px 1fr;
+    border-top: 1px solid var(--border);
+    padding: 40px 0;
+  }
+  .move:last-child { border-bottom: 1px solid var(--border); }
+  .move-index {
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); padding-top: 4px;
+  }
+  .move-body h3 {
+    font-size: 20px; font-weight: 600; margin-bottom: 4px; letter-spacing: -0.01em;
+  }
+  .move-phase {
+    font-size: 11px; color: var(--blue); margin-bottom: 14px;
+    letter-spacing: 0.04em;
+  }
+  .move-body p { font-size: 13px; color: var(--mid); line-height: 1.7; margin-bottom: 16px; }
+  .move-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .move-tag {
+    font-size: 11px; color: var(--mid);
+    border: 1px solid var(--border);
+    padding: 4px 12px; border-radius: 2px;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── EXPO PLAYBOOK ── */
+  .expo-phases { margin-top: 48px; }
+  .expo-phase {
+    display: grid; grid-template-columns: 160px 1fr;
+    border-top: 1px solid var(--border);
+    padding: 40px 0;
+    gap: 40px;
+  }
+  .expo-phase:last-child { border-bottom: 1px solid var(--border); }
+  .expo-phase-label { font-size: 12px; color: var(--muted); padding-top: 3px; line-height: 1.5; }
+  .expo-phase-title { font-size: 17px; font-weight: 600; margin-bottom: 20px; letter-spacing: -0.01em; }
+  .expo-actions-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
+  }
+  .expo-action h4 { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+  .expo-action p  { font-size: 12px; color: var(--mid); line-height: 1.6; }
+
+  /* ── AUTOMATION ── */
+  .auto-intro {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
+    margin-bottom: 48px; align-items: start;
+  }
+  .auto-intro h3 {
+    font-size: 26px; font-weight: 300; letter-spacing: -0.02em;
+    line-height: 1.3; margin-bottom: 16px;
+  }
+  .auto-intro h3 strong { font-weight: 700; }
+  .auto-intro p { font-size: 13px; color: var(--mid); line-height: 1.7; }
+  .auto-stats { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border); }
+  .auto-stat {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: baseline;
+  }
+  .auto-stat:last-child { border-bottom: none; }
+  .auto-stat .n { font-size: 22px; font-weight: 700; }
+  .auto-stat .l { font-size: 11px; color: var(--muted); }
+
+  /* CODE BLOCK */
+  .code-wrap {
+    border: 1px solid var(--border);
+    background: #FAFAFA;
+  }
+  .code-top {
+    padding: 10px 18px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 8px;
+    background: var(--white);
+  }
+  .code-dots { display: flex; gap: 5px; }
+  .dot-r, .dot-y, .dot-g {
+    width: 9px; height: 9px; border-radius: 50%;
+  }
+  .dot-r { background: #FF5F57; }
+  .dot-y { background: #FEBC2E; }
+  .dot-g { background: #28C840; }
+  .code-fn { font-size: 11px; color: var(--muted); font-family: 'Courier New', monospace; margin-left: 4px; }
+  .code-body {
+    padding: 24px 24px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    line-height: 1.75;
+    overflow-x: auto;
+    color: var(--dark);
+  }
+  .cc { color: #999; }
+  .ck { color: #0070C0; }
+  .cs { color: #2E7D32; }
+  .co { color: var(--blue); font-weight: 600; }
+
+  /* ── EXPOS ── */
+  .expo-events {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    border-top: 1px solid var(--border);
+    border-left: 1px solid var(--border);
+    margin-top: 48px;
+  }
+  .expo-event {
+    padding: 32px 28px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    display: flex; gap: 20px;
+  }
+  .expo-date-box { flex-shrink: 0; }
+  .expo-month { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+  .expo-day { font-size: 28px; font-weight: 300; line-height: 1; color: var(--black); }
+  .expo-info h4 { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+  .expo-info p  { font-size: 12px; color: var(--mid); line-height: 1.5; }
+  .expo-rel { font-size: 10px; color: var(--blue); margin-top: 8px; letter-spacing: 0.04em; }
+
+  /* ── 90 DAY PLAN ── */
+  .plan-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--border);
+    border-left: 1px solid var(--border);
+    margin-top: 48px;
+  }
+  .plan-col {
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .plan-head {
+    padding: 24px 24px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .plan-head .ph-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 4px; }
+  .plan-head h3 { font-size: 16px; font-weight: 600; }
+  .plan-items { list-style: none; padding: 20px 24px 24px; }
+  .plan-item {
+    font-size: 12px; color: var(--mid);
+    padding: 8px 0;
+    border-bottom: 1px solid var(--light);
+    display: flex; gap: 10px;
+  }
+  .plan-item:last-child { border-bottom: none; }
+  .plan-item::before { content: '—'; color: var(--border); flex-shrink: 0; }
+
+  /* ── BIO ── */
+  .bio-grid {
+    display: grid; grid-template-columns: 1fr 260px; gap: 80px;
+    align-items: start;
+  }
+  .bio-name { font-size: 28px; font-weight: 300; letter-spacing: -0.02em; margin-bottom: 4px; }
+  .bio-title-line { font-size: 13px; color: var(--blue); margin-bottom: 24px; }
+  .bio-text p { font-size: 13px; color: var(--mid); line-height: 1.8; margin-bottom: 12px; }
+  .bio-contact { margin-top: 28px; display: flex; flex-direction: column; gap: 6px; }
+  .bio-contact a { font-size: 12px; color: var(--mid); text-decoration: none; }
+  .bio-contact a:hover { color: var(--black); }
+
+  .creds h4 { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 16px; }
+  .cred {
+    font-size: 12px; color: var(--mid);
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .cred:last-child { border-bottom: none; }
+  .cred::before { content: '✓'; color: var(--blue); font-size: 11px; font-weight: 700; }
+
+  /* ── CTA ── */
+  .cta-section {
+    padding: 96px 48px;
+    background: var(--black);
+    text-align: left;
+  }
+  .cta-inner { max-width: 880px; margin: 0 auto; }
+  .cta-section .label { color: rgba(255,255,255,0.3); }
+  .cta-section h2 {
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 300; letter-spacing: -0.025em;
+    color: var(--white); margin-bottom: 20px; line-height: 1.2;
+  }
+  .cta-section h2 strong { font-weight: 700; }
+  .cta-section p { font-size: 15px; color: rgba(255,255,255,0.5); margin-bottom: 40px; max-width: 480px; }
+  .cta-email {
+    display: inline-block;
+    font-size: 14px; font-weight: 600;
+    color: var(--white);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+    padding-bottom: 3px;
+    transition: border-color 0.2s;
+  }
+  .cta-email:hover { border-color: var(--white); }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 24px 48px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between;
+    font-size: 11px; color: var(--muted);
+    background: var(--white);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 720px) {
+    .section, .hero { padding: 64px 24px; }
+    nav { padding: 0 24px; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .findings-grid { grid-template-columns: 1fr; }
+    .expo-actions-grid { grid-template-columns: 1fr; }
+    .plan-grid { grid-template-columns: 1fr; }
+    .expo-events { grid-template-columns: 1fr; }
+    .bio-grid { grid-template-columns: 1fr; gap: 48px; }
+    .auto-intro { grid-template-columns: 1fr; gap: 32px; }
+    .move { grid-template-columns: 1fr; gap: 4px; }
+    .expo-phase { grid-template-columns: 1fr; gap: 16px; }
+    footer { flex-direction: column; gap: 6px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <span class="nav-name">Pragya Arya</span>
+    <span class="nav-sep">|</span>
+    <span class="nav-role">Marketing Executive Application</span>
+  </div>
+  <div class="nav-right">DJK India</div>
+</nav>
+
+<!-- HERO -->
+<div class="hero" style="padding-top:140px;">
+  <div class="hero-inner">
+    <span class="label">Digital Marketing Audit — Daiichi Jitsugyo India</span>
+    <h1>Before the interview,<br><strong>I already ran your<br>digital audit.</strong></h1>
+    <p class="hero-sub">Here's what DJK India's digital presence looks like from the outside — and exactly what I'd do in the first 90 days.</p>
+    <a href="#audit" class="hero-link">See the findings →</a>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="section off" style="padding: 0;">
+  <div class="inner" style="max-width:100%;">
+    <div class="stats-row">
+      <div class="stat">
+        <div class="stat-num"><span>5</span>+</div>
+        <div class="stat-lbl">Years in Digital Marketing</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">$<span>20</span>K+</div>
+        <div class="stat-lbl">Monthly Ad Budgets Managed</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num"><span>4</span></div>
+        <div class="stat-lbl">Indian Industrial EXPOs Researched</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num"><span>500</span></div>
+        <div class="stat-lbl">EXPO Leads Automated (demo)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AUDIT FINDINGS -->
+<div class="section" id="audit">
+  <div class="inner">
+    <span class="label label-blue">What I found</span>
+    <h2 style="font-size:clamp(24px,3.5vw,38px); font-weight:300; letter-spacing:-0.02em; margin-bottom:8px;">DJK India's Digital Gaps</h2>
+    <p style="font-size:14px; color:var(--mid); max-width:480px;">An honest outside-in audit of your current digital presence. Six observations — five fixable quickly.</p>
+
+    <div class="findings-grid">
+      <div class="finding">
+        <div class="finding-status"><div class="status-dot red"></div><span class="status-label">Critical</span></div>
+        <h3>SEO: You rank for your name. Not your category.</h3>
+        <p>A buyer searching "injection molding machine supplier India" is not finding DJK. You earn traffic on branded searches only. That's a revenue gap hiding in plain sight.</p>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><div class="status-dot yellow"></div><span class="status-label">Leaking value</span></div>
+        <h3>EXPO leads go cold after day three.</h3>
+        <p>Most B2B companies send one generic follow-up email. By day five the lead has moved on. There's no segmented, product-specific sequence in place.</p>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><div class="status-dot yellow"></div><span class="status-label">Underutilised</span></div>
+        <h3>LinkedIn is a presence, not a channel.</h3>
+        <p>Posting inconsistently and mostly announcements. Your buyers — plant managers, procurement heads — are on LinkedIn daily. They need thought leadership, not product brochures.</p>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><div class="status-dot yellow"></div><span class="status-label">Opportunity</span></div>
+        <h3>Email list exists. Automation doesn't.</h3>
+        <p>Without segmented sequences by product line and buyer stage, you're sending the same email to a plant manager and a procurement officer. Personalisation at scale costs nothing once set up.</p>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><div class="status-dot red"></div><span class="status-label">Missing</span></div>
+        <h3>No retargeting after EXPO or website visit.</h3>
+        <p>When a prospect visits your website or sees your stand, they should see DJK on LinkedIn and Google for the next 30 days. Currently they leave and you disappear. A retargeting setup takes two days.</p>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><div class="status-dot green"></div><span class="status-label">Strength</span></div>
+        <h3>Strong product portfolio. Weak digital proof.</h3>
+        <p>The domain authority is real — Pharma, SMT, Die Casting, Injection Molding across major cities. The case studies and customer stories exist. They just aren't online. Easy win.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- THREE MOVES -->
+<div class="section off">
+  <div class="inner">
+    <span class="label label-blue">The plan</span>
+    <h2 style="font-size:clamp(24px,3.5vw,38px); font-weight:300; letter-spacing:-0.02em; margin-bottom:8px;">3 Moves. 90 Days.</h2>
+    <p style="font-size:14px; color:var(--mid); max-width:480px;">Not a generic marketing plan. Specific to DJK's gaps, products, and buyer profile.</p>
+
+    <div class="moves">
+      <div class="move">
+        <div class="move-index">01</div>
+        <div class="move-body">
+          <div class="move-phase">Month 1 — Days 1–30</div>
+          <h3>Win the EXPO pre/post window.</h3>
+          <p>Every EXPO DJK attends should be a six-week digital campaign, not a two-day stand. Four weeks before: LinkedIn content targeting plant managers in the host city, Google Ads on buyer-intent terms, email drip to existing contacts. Day one post-EXPO: automated personalised follow-up sequences segmented by product interest and engagement. I've already built this — see below.</p>
+          <div class="move-tags">
+            <span class="move-tag">↑ Qualified leads per EXPO</span>
+            <span class="move-tag">↑ Email open rates</span>
+            <span class="move-tag">↓ Lead response time</span>
+          </div>
+        </div>
+      </div>
+      <div class="move">
+        <div class="move-index">02</div>
+        <div class="move-body">
+          <div class="move-phase">Month 2 — Days 31–60</div>
+          <h3>Turn LinkedIn into a lead channel.</h3>
+          <p>DJK's buyers — production heads, procurement managers, plant engineers at Sun Pharma, Dixon, Tata AutoComp — are on LinkedIn daily. A consistent content programme (3 posts per week) positioning DJK as India's most trusted industrial machinery partner changes the dynamic: instead of chasing leads at EXPOs, leads start coming to you.</p>
+          <div class="move-tags">
+            <span class="move-tag">Inbound leads from LinkedIn</span>
+            <span class="move-tag">Brand recall at next EXPO</span>
+          </div>
+        </div>
+      </div>
+      <div class="move">
+        <div class="move-index">03</div>
+        <div class="move-body">
+          <div class="move-phase">Month 3 — Days 61–90</div>
+          <h3>Close the SEO gap on buyer-intent searches.</h3>
+          <p>Ranking for "Daiichi Jitsugyo India" is not enough. The goal is ranking for "injection molding machine supplier India," "SMT equipment Gurugram," "pharma packaging machinery." A focused content and technical SEO push on 15–20 high-intent keywords puts DJK in front of buyers who have budget and are comparing vendors.</p>
+          <div class="move-tags">
+            <span class="move-tag">↑ Organic traffic from buyers</span>
+            <span class="move-tag">↓ CPA vs pure paid</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXPO PLAYBOOK -->
+<div class="section">
+  <div class="inner">
+    <span class="label label-blue">Detailed breakdown</span>
+    <h2 style="font-size:clamp(24px,3.5vw,38px); font-weight:300; letter-spacing:-0.02em; margin-bottom:8px;">The Full-Funnel EXPO Playbook</h2>
+    <p style="font-size:14px; color:var(--mid); max-width:480px;">What a proper DJK EXPO activation looks like — using ENGIMACH 2026 as the example.</p>
+
+    <div class="expo-phases">
+      <div class="expo-phase">
+        <div class="expo-phase-label">4 weeks before<br>EXPO</div>
+        <div>
+          <div class="expo-phase-title">Pre-EXPO Digital Activation</div>
+          <div class="expo-actions-grid">
+            <div class="expo-action"><h4>LinkedIn Campaign</h4><p>Targeted posts for plant managers in Ahmedabad/Gujarat. "We'll be at ENGIMACH — come see how [product] cuts your cycle time."</p></div>
+            <div class="expo-action"><h4>Email Warm-Up</h4><p>"We're exhibiting at ENGIMACH — book 15 minutes with our engineer" — sent to existing contacts segmented by product line.</p></div>
+            <div class="expo-action"><h4>Google Ads — Local Intent</h4><p>2-week campaign targeting buyer-intent searches in Gujarat. Budget: ₹15–20K. Goal: stall visits.</p></div>
+            <div class="expo-action"><h4>UTM-Tagged Landing Page</h4><p>Dedicated EXPO page with stall number, team contact, product focus, and meeting booking form.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="expo-phase">
+        <div class="expo-phase-label">During<br>EXPO</div>
+        <div>
+          <div class="expo-phase-title">Live Capture & Real-Time Content</div>
+          <div class="expo-actions-grid">
+            <div class="expo-action"><h4>LinkedIn Live Content</h4><p>1–2 posts per day from the floor: stall setup, product demos, team stories. Shows DJK is active and engaged.</p></div>
+            <div class="expo-action"><h4>Lead Capture with Context</h4><p>Every lead tagged: product interest, engagement level, key notes. Feeds directly into the post-EXPO automation.</p></div>
+            <div class="expo-action"><h4>Short Video Clips</h4><p>15–30 second clips of machine demos. Repurposed for LinkedIn, Instagram, and post-EXPO email sequences.</p></div>
+            <div class="expo-action"><h4>QR Code Engagement</h4><p>Links to product spec sheets and contact form. Tracked. Everyone who scans is added to the follow-up sequence.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="expo-phase">
+        <div class="expo-phase-label">Within 24 hours<br>of EXPO end</div>
+        <div>
+          <div class="expo-phase-title">Post-EXPO Automation Fires</div>
+          <div class="expo-actions-grid">
+            <div class="expo-action"><h4>Automated Email Sequences</h4><p>HOT leads get personalised email referencing their specific conversation. WARM gets value email and case study. NURTURE gets catalogue. All within 24 hours.</p></div>
+            <div class="expo-action"><h4>LinkedIn Retargeting</h4><p>All website visitors and EXPO landing page visitors get a 30-day LinkedIn retargeting campaign. DJK stays visible while they evaluate.</p></div>
+            <div class="expo-action"><h4>14-Day Follow-Up Calendar</h4><p>Automated schedule showing every follow-up email that needs to go out, to whom, on which day — with priority score.</p></div>
+            <div class="expo-action"><h4>EXPO ROI Report</h4><p>Leads captured → emails sent → responses → meetings booked → proposals sent. One page. Shows leadership what the EXPO delivered.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AUTOMATION -->
+<div class="section off">
+  <div class="inner">
+    <span class="label label-blue">Already built</span>
+    <div class="auto-intro">
+      <div>
+        <h3>500 leads. 500 personalised<br><strong>emails. Under 2 minutes.</strong></h3>
+        <p style="margin-top:16px;">A Python script that takes your EXPO lead export, scores every lead by engagement and seniority, segments by product interest, and generates a personalised follow-up sequence for each — plus a prioritised 14-day send calendar ready to import into any email tool.</p>
+      </div>
+      <div class="auto-stats">
+        <div class="auto-stat"><span class="l">Email tiers</span><span class="n">3</span></div>
+        <div class="auto-stat"><span class="l">Product segments</span><span class="n">5</span></div>
+        <div class="auto-stat"><span class="l">Follow-up window</span><span class="n">14 days</span></div>
+        <div class="auto-stat"><span class="l">Manual effort after setup</span><span class="n">0</span></div>
+      </div>
+    </div>
+
+    <div class="code-wrap">
+      <div class="code-top">
+        <div class="code-dots"><div class="dot-r"></div><div class="dot-y"></div><div class="dot-g"></div></div>
+        <span class="code-fn">expo_lead_automation.py &nbsp;·&nbsp; python3</span>
+      </div>
+      <div class="code-body">
+<span class="cc"># EXPO Lead Automation — DJK India | run: python3 expo_lead_automation.py</span>
+
+<span class="ck">def</span> score_lead(lead):
+    score = ENGAGEMENT_SCORES[lead[<span class="cs">"engagement"</span>]]  <span class="cc"># high=10, medium=5, low=1</span>
+    <span class="ck">for</span> keyword, pts <span class="ck">in</span> TITLE_SCORES.items():   <span class="cc"># CEO=8, VP=7, Manager=4</span>
+        <span class="ck">if</span> keyword <span class="ck">in</span> lead[<span class="cs">"title"</span>].lower():
+            score += pts; <span class="ck">break</span>
+    <span class="ck">return</span> score
+
+<span class="cc">─────────────────────────────────────────────</span>
+<span class="co">  ✓  Anita Verma      Plasticraft Pvt Ltd   [HOT 🔥]  Score: 18</span>
+<span class="co">  ✓  Priya Mehta      Dixon Technologies    [HOT 🔥]  Score: 17</span>
+<span class="co">  ✓  Rajesh Kumar     Sun Pharma Ltd        [HOT 🔥]  Score: 15</span>
+<span class="co">  ✓  Sunita Rao       Apollo Hospitals      [WARM]    Score: 11</span>
+<span class="co">  ✓  Arvind Shenoy    Tata AutoComp         [WARM]    Score:  9</span>
+<span class="co">  ✓  Deepak Joshi     Bosch India           [NURTURE] Score:  5</span>
+<span class="cc">─────────────────────────────────────────────</span>
+<span class="co">  ✅  17 emails generated · followup_calendar.csv saved</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXPO CALENDAR -->
+<div class="section">
+  <div class="inner">
+    <span class="label label-blue">Key dates</span>
+    <h2 style="font-size:clamp(24px,3.5vw,38px); font-weight:300; letter-spacing:-0.02em; margin-bottom:8px;">Indian Industrial EXPOs — 2026–2027</h2>
+    <p style="font-size:14px; color:var(--mid); max-width:480px;">The events where DJK India's buyers are. Each one is a six-week digital campaign opportunity.</p>
+
+    <div class="expo-events">
+      <div class="expo-event">
+        <div class="expo-date-box"><div class="expo-month">Dec</div><div class="expo-day">05</div></div>
+        <div class="expo-info">
+          <h4>ENGIMACH 2026 — Ahmedabad</h4>
+          <p>Engineering machinery — injection molding, die casting, precision components. Gujarat's manufacturing belt.</p>
+          <div class="expo-rel">Primary target — Injection Molding / Die Casting</div>
+        </div>
+      </div>
+      <div class="expo-event">
+        <div class="expo-date-box"><div class="expo-month">Jan</div><div class="expo-day">22</div></div>
+        <div class="expo-info">
+          <h4>IMTEX 2027 — Bangalore</h4>
+          <p>India's premier machine tool exhibition. Automotive, aerospace, precision engineering buyers.</p>
+          <div class="expo-rel">High relevance — SMT / Die Casting</div>
+        </div>
+      </div>
+      <div class="expo-event">
+        <div class="expo-date-box"><div class="expo-month">Feb</div><div class="expo-day">05</div></div>
+        <div class="expo-info">
+          <h4>Pharma India EXPO 2027 — Mumbai</h4>
+          <p>Pharmaceutical manufacturing and packaging equipment. Apollo, Cipla, Sun Pharma all attend.</p>
+          <div class="expo-rel">High relevance — Pharma / Medical Device</div>
+        </div>
+      </div>
+      <div class="expo-event">
+        <div class="expo-date-box"><div class="expo-month">Mar</div><div class="expo-day">10</div></div>
+        <div class="expo-info">
+          <h4>India Electronics Week 2027 — Bangalore</h4>
+          <p>Electronics manufacturing, PCB, SMT. Dixon, Wipro, Bosch India regularly exhibit.</p>
+          <div class="expo-rel">High relevance — SMT / PCB Inspection</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 90 DAY PLAN -->
+<div class="section off">
+  <div class="inner">
+    <span class="label label-blue">Week by week</span>
+    <h2 style="font-size:clamp(24px,3.5vw,38px); font-weight:300; letter-spacing:-0.02em; margin-bottom:8px;">The 90-Day Plan</h2>
+    <p style="font-size:14px; color:var(--mid); max-width:480px;">Specific, sequenced, measurable.</p>
+
+    <div class="plan-grid">
+      <div class="plan-col">
+        <div class="plan-head">
+          <div class="ph-label">Days 1–30</div>
+          <h3>Foundation</h3>
+        </div>
+        <ul class="plan-items">
+          <li class="plan-item">Audit all digital channels — website, LinkedIn, email, ad accounts</li>
+          <li class="plan-item">Set up GA4 properly with event tracking + UTM taxonomy</li>
+          <li class="plan-item">Identify next EXPO — build pre-event campaign plan</li>
+          <li class="plan-item">SEMrush keyword gap analysis vs top 3 competitors</li>
+          <li class="plan-item">Deploy EXPO lead automation for upcoming event</li>
+          <li class="plan-item">LinkedIn content calendar — first 4 weeks drafted</li>
+        </ul>
+      </div>
+      <div class="plan-col">
+        <div class="plan-head">
+          <div class="ph-label">Days 31–60</div>
+          <h3>Build</h3>
+        </div>
+        <ul class="plan-items">
+          <li class="plan-item">Launch LinkedIn programme — 3×/week, tracked by engagement</li>
+          <li class="plan-item">Build 5 product-specific landing pages for target keywords</li>
+          <li class="plan-item">Set up LinkedIn retargeting for EXPO + website visitors</li>
+          <li class="plan-item">Email list segmentation by product and buyer stage</li>
+          <li class="plan-item">First automated email sequence live and tested</li>
+          <li class="plan-item">Weekly KPI report template built and shared with team</li>
+        </ul>
+      </div>
+      <div class="plan-col">
+        <div class="plan-head">
+          <div class="ph-label">Days 61–90</div>
+          <h3>Optimise</h3>
+        </div>
+        <ul class="plan-items">
+          <li class="plan-item">Review all channel performance — double down on what's working</li>
+          <li class="plan-item">First organic ranking improvements visible (SEO lags ~60 days)</li>
+          <li class="plan-item">A/B test top 3 email subject lines — apply winner to full list</li>
+          <li class="plan-item">LinkedIn follower growth report — benchmark for next quarter</li>
+          <li class="plan-item">Post-EXPO ROI report — leads to revenue</li>
+          <li class="plan-item">Q2 marketing calendar drafted with EXPO dates + content themes</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BIO -->
+<div class="section">
+  <div class="inner">
+    <span class="label">About</span>
+    <div class="bio-grid">
+      <div>
+        <div class="bio-name">Pragya Arya</div>
+        <div class="bio-title-line">Applying for Marketing Executive — DJK India</div>
+        <div class="bio-text">
+          <p>5+ years executing digital marketing across B2B and consumer brands — SEO, SEM, PPC, social media, email automation, and EXPO campaign management. Led international trade event marketing including AMBIENTE Frankfurt, managed ad budgets up to $20K/month with measurable ROI.</p>
+          <p>CS degree (B.Tech, Rajasthan Technical University) + MSc Marketing & Brand Management (Oxford Brookes University, UK). The technical background means I build automations and read data fluently — not just run campaigns.</p>
+          <p>Based in New Delhi. Available immediately.</p>
+        </div>
+        <div class="bio-contact">
+          <a href="mailto:sonipragya8@gmail.com">sonipragya8@gmail.com</a>
+          <a href="https://linkedin.com/in/pragyaarya-630022109">linkedin.com/in/pragyaarya-630022109</a>
+        </div>
+      </div>
+      <div class="creds">
+        <h4>Credentials</h4>
+        <div class="cred">Google Ads Certified</div>
+        <div class="cred">Google Analytics GA4 Certified</div>
+        <div class="cred">HubSpot Inbound Certified</div>
+        <div class="cred">McKinsey Forward Programme 2025</div>
+        <div class="cred">MSc Marketing — Oxford Brookes</div>
+        <div class="cred">B.Tech Computer Science</div>
+        <div class="cred">English & French Fluent</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="cta-inner">
+    <span class="label">Next step</span>
+    <h2>The audit is done.<br><strong>Let's talk.</strong></h2>
+    <p>The strategy is written. The automation is built. If DJK India wants a marketer who comes prepared — I'm available immediately.</p>
+    <a href="mailto:sonipragya8@gmail.com?subject=DJK India — Marketing Executive Role" class="cta-email">sonipragya8@gmail.com →</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span>Pragya Arya — Digital Marketing Specialist · New Delhi, India</span>
+  <span>Prepared for Daiichi Jitsugyo India Pvt. Ltd.</span>
+</footer>
+
+</body>
+</html>
